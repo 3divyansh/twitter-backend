@@ -4,7 +4,7 @@ dotenv.config({
     path:"../config/.env"
 })
 const databaseConnection = () => {
-    mongoose.connect("mongodb+srv://divyanshsoni:divyansh@divyansh.6jc07nb.mongodb.net/?retryWrites=true&w=majority&appName=Divyanshz").then(()=>{
+    mongoose.connect(process.env.MONGO_URI).then(()=>{
         console.log("Connected to mongoDB");
     }).catch((error)=>{
         console.log(error);
