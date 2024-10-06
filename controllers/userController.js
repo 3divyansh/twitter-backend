@@ -46,6 +46,7 @@ export const Login = async (req, res) => {
             })
         };
         const user = await User.findOne({ email });
+        console.log("===>",user)
         if (!user) {
             return res.status(401).json({
                 message: "Incorrect email or password",
@@ -63,6 +64,7 @@ export const Login = async (req, res) => {
             userId: user._id
         }
         const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, { expiresIn: "1d" });
+            console.log("TOKN",token)
         return res.status(201).cookie("token", token, { expiresIn: "1d", httpOnly: true }).json({
             message: `Welcome back ${user.name}`,
             user,
