@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     bookmarks:{
         type:Array,
         default:[]
-    }
+    },
+    profileImage: {
+        type: String,
+        default: ''
+      }
 },{timestamps:true});
 export const User = mongoose.model("User", userSchema);

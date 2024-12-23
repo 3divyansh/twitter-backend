@@ -177,3 +177,26 @@ export const unfollow = async (req,res) => {
         console.log(error);
     }
 }
+
+export const updateMyProfile = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { name, username, profileImage } = req.body;
+  
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        { name, username, profileImage },
+        { new: true, runValidators: true } // `new: true` returns the updated document
+      ).select("-password");
+  
+      return res.status(200).json({
+        message: "Profile updated successfully!",
+        updatedProfile: updatedUser,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Error updating profile" });
+    }
+  };
+
+  
